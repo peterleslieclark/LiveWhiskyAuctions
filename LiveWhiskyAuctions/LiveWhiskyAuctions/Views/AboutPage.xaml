@@ -4,45 +4,62 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Content>
-        <StackLayout Margin="10">
+        <Grid
+            Padding="10"
+            BackgroundColor="Black"
+            HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
             <Label
-                Margin="0,10"
-                FontSize="20"
-                HorizontalOptions="Center"
-                Text="Live Auctions" />
+                Grid.Row="0"
+                Grid.Column="0"
+                FontAttributes="Bold"
+                Text="Name" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                FontAttributes="Bold"
+                HorizontalOptions="End"
+                Text="End Date" />
 
             <ListView
                 x:Name="auctionsListView"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
                 ItemSelected="OnItemSelected"
                 ItemsSource="{Binding Auctions}"
-                SeparatorVisibility="None">
+                SeparatorColor="White">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <!--<Grid ColumnSpacing="100">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                </Grid.ColumnDefinitions>-->
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
 
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Name}" />
-                                <Label Text="{Binding StartTime}" />
-                                <Label Text="{Binding EndTime}" />
-                                <Label Text="{Binding TimeRemaining}" />
-                            </StackLayout>
-                            <!--</Grid>-->
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Column="0"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Column="1"
+                                    HorizontalOptions="End"
+                                    Text="{Binding EndTime}"
+                                    VerticalOptions="Center" />
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
