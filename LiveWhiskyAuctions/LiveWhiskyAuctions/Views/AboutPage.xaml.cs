@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Xml;
 using Xamarin.Essentials;
@@ -38,10 +39,15 @@ namespace LiveWhiskyAuctions.Views
         }
 
         private async void LoadAuctionsAsync()
-        {
+        {           
             var auctions = await ScrapeAuctionsAsync();
             auctionsListView.ItemsSource = auctions;
             AuctionsList = auctions;
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                UpdateTimeRemaining();
+                return true;
+            });
         }
 
         private async Task<List<Auction>> ScrapeAuctionsAsync()
@@ -64,14 +70,17 @@ namespace LiveWhiskyAuctions.Views
 
                 foreach (var node in auctionNodes)
                 {
-                    var auctionColumns = node.Descendants("td").ToList();                   
-
+                    var auctionColumns = node.Descendants("td").ToList();
+                    
                     if (auctionColumns.Count > 0)
-                    {               
+                    {
+                        var endTime = auctionColumns[2]?.InnerText.Trim();
+                        var timeRemaining = DateTime.Parse(endTime) - DateTime.Now;
                         var auction = new Auction
                         {
                             Name = auctionColumns[0].Descendants("a").FirstOrDefault()?.InnerText.Trim(),                           
-                            EndTime = auctionColumns[2]?.InnerText.Trim()                            
+                            EndTime = endTime,
+                            TimeRemaining = $"{timeRemaining.Days}d {timeRemaining.Hours}h {timeRemaining.Minutes}m"
                         };                       
 
                         auction.GetLogoAsync();
@@ -86,6 +95,7 @@ namespace LiveWhiskyAuctions.Views
                     Name = "The Whisky Shop Auction",
                     StartTime = "Varies Per Lot",
                     EndTime = "Varies Per Lot",
+                    TimeRemaining = "Varies Per Lot",                  
                     Link = "https://www.whiskyshop.com/auctions/lots"
                 };
 
@@ -112,8 +122,10 @@ namespace LiveWhiskyAuctions.Views
                     {
                         auction.TimeRemaining = $"{timeRemaining.Days}d {timeRemaining.Hours}h {timeRemaining.Minutes}m {timeRemaining.Seconds}s";
                     }
-                }                
+                }
+                
             }
+            
         }
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -134,9 +146,20 @@ namespace LiveWhiskyAuctions.Views
         public string EndTime { get; set; }
         public string Logo { get; set; }
         public string Link { get; set; }
-        public string TimeRemaining { get; set; }
+        private string _timeRemaining;
+        public string TimeRemaining { get => _timeRemaining; set { _timeRemaining = Uri.UnescapeDataString(value ?? string.Empty); OnPropertyChanged(); } }
 
+       
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            var changed = PropertyChanged;
+            if (changed == null)
+                return;
+
+            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public void GetLogoAsync()
         {

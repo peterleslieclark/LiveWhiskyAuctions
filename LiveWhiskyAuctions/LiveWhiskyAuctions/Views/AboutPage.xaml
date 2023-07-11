@@ -4,62 +4,81 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Content>
-        <Grid
-            Padding="10"
-            BackgroundColor="Black"
-            HorizontalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Frame
+            CornerRadius="0"
+            HasShadow="True"
+            HeightRequest="120"
+            WidthRequest="120">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Frame.Background>
+                <!--  StartPoint defaults to (0,0)  -->
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="Black" />
+                    <GradientStop Offset="1.0" Color="#9F2B68" />
+                </LinearGradientBrush>
+            </Frame.Background>
+            <Grid Padding="5" HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                FontAttributes="Bold"
-                Text="Name" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                FontAttributes="Bold"
-                HorizontalOptions="End"
-                Text="End Date" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <ListView
-                x:Name="auctionsListView"
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                ItemSelected="OnItemSelected"
-                ItemsSource="{Binding Auctions}"
-                SeparatorColor="White">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontAttributes="Bold"
+                    Text="Name"
+                    TextColor="White" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    HorizontalOptions="End"
+                    Text="Time Remaining"
+                    TextColor="White" />
 
-                                </Grid.ColumnDefinitions>
+                <ListView
+                    x:Name="auctionsListView"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    ItemSelected="OnItemSelected"
+                    ItemsSource="{Binding Auctions}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
 
-                                <Label
-                                    Grid.Column="0"
-                                    Text="{Binding Name}"
-                                    VerticalOptions="Center" />
-                                <Label
-                                    Grid.Column="1"
-                                    HorizontalOptions="End"
-                                    Text="{Binding EndTime}"
-                                    VerticalOptions="Center" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+
+                                    <Label
+                                        Grid.Column="0"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding Name}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        Text="{Binding TimeRemaining}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>
