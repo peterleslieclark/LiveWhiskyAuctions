@@ -2,7 +2,9 @@
 <ContentPage
     x:Class="LiveWhiskyAuctions.Views.AboutPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Live Whisky Auctions">
+
     <ContentPage.Content>
         <Frame
             CornerRadius="0"

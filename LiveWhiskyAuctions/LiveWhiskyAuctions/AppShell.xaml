@@ -34,12 +34,12 @@
         <ShellContent
             Title="Live Auctions"
             ContentTemplate="{DataTemplate local:AboutPage}"
-            Icon="icon_about.png"
+            Icon="icon_live.png"
             Route="AboutPage" />
         <ShellContent
             Title="Upcoming Auctions"
             ContentTemplate="{DataTemplate local:ItemsPage}"
-            Icon="icon_feed.png" />
+            Icon="icon_upcoming.png" />
     </TabBar>
-   
+
 </Shell>

@@ -13,8 +13,7 @@ using System.Xml;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using static System.Collections.Specialized.BitVector32;
-using static System.Net.WebRequestMethods;
+
 
 namespace LiveWhiskyAuctions.Views
 {
@@ -76,6 +75,7 @@ namespace LiveWhiskyAuctions.Views
                     {
                         var endTime = auctionColumns[2]?.InnerText.Trim();
                         var timeRemaining = DateTime.Parse(endTime) - DateTime.Now;
+                        
                         var auction = new Auction
                         {
                             Name = auctionColumns[0].Descendants("a").FirstOrDefault()?.InnerText.Trim(),                           
@@ -112,8 +112,12 @@ namespace LiveWhiskyAuctions.Views
             {
                 if(auction.Name != "The Whisky Shop Auction")
                 {
+                    
                     var timeRemaining = DateTime.Parse(auction.EndTime) - DateTime.Now;
-
+                    if (auction.Name.ToLower().Contains("whisky.auction"))
+                    {
+                        
+                    }
                     if (timeRemaining.TotalSeconds <= 0)
                     {
                         auction.TimeRemaining = "Auction Ended";
@@ -206,14 +210,29 @@ namespace LiveWhiskyAuctions.Views
                 Link = "https://whiskyauctioneer.com/current-auction";
                 return;
             }
-            if (Name.ToLower().Contains("whiskyauction"))
+            if (Name.ToLower().Contains("just"))
             {
-                Link = "https://whiskyauction.com/wac/auctionBrowser";
+                Link = "https://www.just-whisky.co.uk/";
                 return;
-            }           
+            }
+            if (Name.ToLower().Contains("grand"))
+            {
+                Link = "https://www.thegrandwhiskyauction.com/live-auction";
+                return;
+            }                     
             if (Name.ToLower().Contains("thewhiskyshop"))
             {
                 Link = "https://www.whiskyshop.com/auctions/lots";
+                return;
+            }
+            if (Name.ToLower().Contains("hammer"))
+            {
+                Link = "https://www.whiskyhammer.com/";
+                return;
+            }
+            if (Name.ToLower().Contains("auktion"))
+            {
+                Link = "https://www.whiskyauktionberlin.de/";
                 return;
             }
             if (Name.ToLower().Contains("bull"))
@@ -221,7 +240,40 @@ namespace LiveWhiskyAuctions.Views
                 Link = "https://www.whiskybull.com/live-auction";
                 return;
             }
+            if (Name.ToLower().Contains("rum"))
+            {
+                Link = "https://rumauctioneer.com/";
+                return;
+            }
+            if (Name.ToLower().Contains("speyside"))
+            {
+                Link = "https://www.speysidewhiskyauctions.co.uk/";
+                return;
+            }
+            if (Name.ToLower().Contains("austra"))
+            {
+                Link = "https://www.australianwhiskyauctions.com.au/";
+                return;
+            }
+            if (Name.ToLower().Contains("european"))
+            {
+                Link = "https://europeanwhiskyauctions.com/";
+                return;
+            }
+            if (Name.ToLower().Contains("celtic"))
+            {
+                Link = "https://www.celticwhiskeyauction.com/en/auctions";
+                return;
+            }          
+            if (Name.ToLower().Contains("whiskyauction"))
+            {
+                Link = "https://whiskyauction.com/wac/auctionBrowser";
+                return;
+            }
 
+            //If we get here then there is an issue
+            Link = "https://www.google.com/search?q=" + Name;
+            return;
         }
     }
 }

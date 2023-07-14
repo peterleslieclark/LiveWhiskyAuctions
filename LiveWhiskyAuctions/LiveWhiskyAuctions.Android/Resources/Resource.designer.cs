@@ -16532,10 +16532,10 @@ namespace LiveWhiskyAuctions.Droid
 			public const int design_snackbar_background = 2131165283;
 			
 			// aapt resource value: 0x7F07006B
-			public const int icon_about = 2131165291;
+			public const int icon_live = 2131165291;
 			
 			// aapt resource value: 0x7F07006C
-			public const int icon_feed = 2131165292;
+			public const int icon_upcoming = 2131165292;
 			
 			// aapt resource value: 0x7F070064
 			public const int ic_arrow_down_24dp = 2131165284;
@@ -16670,7 +16670,7 @@ namespace LiveWhiskyAuctions.Droid
 			public const int tooltip_frame_light = 2131165329;
 			
 			// aapt resource value: 0x7F070092
-			public const int xamarin_logo = 2131165330;
+			public const int whiskyglass2 = 2131165330;
 			
 			static Drawable()
 			{
@@ -18789,20 +18789,29 @@ namespace LiveWhiskyAuctions.Droid
 		public partial class Mipmap
 		{
 			
+			// aapt resource value: 0x7F0C0004
+			public const int icon = 2131492868;
+			
+			// aapt resource value: 0x7F0C0005
+			public const int icon_round = 2131492869;
+			
 			// aapt resource value: 0x7F0C0000
-			public const int blacktile = 2131492864;
+			public const int ic_launcher = 2131492864;
 			
 			// aapt resource value: 0x7F0C0001
-			public const int GlencairnGlass = 2131492865;
+			public const int ic_launcher_background = 2131492865;
 			
 			// aapt resource value: 0x7F0C0002
-			public const int icon = 2131492866;
+			public const int ic_launcher_foreground = 2131492866;
 			
 			// aapt resource value: 0x7F0C0003
-			public const int icon_round = 2131492867;
+			public const int ic_launcher_monochrome = 2131492867;
 			
-			// aapt resource value: 0x7F0C0004
-			public const int launcher_foreground = 2131492868;
+			// aapt resource value: 0x7F0C0006
+			public const int launcher_foreground = 2131492870;
+			
+			// aapt resource value: 0x7F0C0007
+			public const int whiskyglass3 = 2131492871;
 			
 			static Mipmap()
 			{
